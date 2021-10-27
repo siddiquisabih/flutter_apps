@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
-const lableStyle = TextStyle(fontSize: 18.00, color: Color(0xFF8D8E98));
-
+ 
 class IconAndText extends StatelessWidget {
   final IconData cardIcon;
   final String cardText;

@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'card_container.dart';
-
-const bottomContainerHeight = 80.0;
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
+import 'constants.dart';
 
 enum Gender {
   male,
@@ -27,7 +23,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPage extends State<InputPage> {
   Gender? selectedGender;
-
+  int changeSliderValue = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,38 +37,34 @@ class _InputPage extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: CardContainer(
+                    onCardTap: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: CardContainer(
-                      backgroundColor: selectedGender == Gender.male
-                          ? activeCardColor
-                          : inactiveCardColor,
-                      cardChild: const IconAndText(
-                        cardIcon: FontAwesomeIcons.mars,
-                        cardText: 'Male',
-                      ),
+                    backgroundColor: selectedGender == Gender.male
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: const IconAndText(
+                      cardIcon: FontAwesomeIcons.mars,
+                      cardText: 'Male',
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: CardContainer(
+                    onCardTap: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: CardContainer(
-                      backgroundColor: selectedGender == Gender.female
-                          ? activeCardColor
-                          : inactiveCardColor,
-                      cardChild: const IconAndText(
-                        cardIcon: FontAwesomeIcons.venus,
-                        cardText: 'FEMALE',
-                      ),
+                    backgroundColor: selectedGender == Gender.female
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: const IconAndText(
+                      cardIcon: FontAwesomeIcons.venus,
+                      cardText: 'FEMALE',
                     ),
                   ),
                 )
@@ -81,10 +73,46 @@ class _InputPage extends State<InputPage> {
           ),
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: CardContainer(
                     backgroundColor: activeCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'HEIGHT',
+                          style: lableStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              changeSliderValue.toString(),
+                              style: numberLableStyle,
+                            ),
+                            const Text(
+                              'cm',
+                              style: lableStyle,
+                            ),
+                          ],
+                        ),
+                        Slider(
+                          activeColor: activeSliderColor,
+                          inactiveColor: inactiveSliderColor,
+                          value: changeSliderValue.toDouble(),
+                          min: 120.0,
+                          max: 220.0,
+                          onChanged: (double value) {
+                            setState(() {
+                              changeSliderValue = value.round();
+                            });
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
