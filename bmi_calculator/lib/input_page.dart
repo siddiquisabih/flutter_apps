@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,6 +8,7 @@ import 'icon_content.dart';
 import 'card_container.dart';
 import 'constants.dart';
 import 'icon_with_button.dart';
+import 'results_page.dart';
 
 enum Gender {
   male,
@@ -223,6 +225,13 @@ class _InputPage extends State<InputPage> {
             height: bottomContainerHeight,
             margin: const EdgeInsets.only(top: 10),
             width: double.infinity,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResultsPage()));
+              },
+              child: const Text('Calculate'),
+            ),
           )
         ],
       ),
