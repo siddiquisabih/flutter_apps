@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'card_container.dart';
 import 'constants.dart';
+import 'icon_with_button.dart';
 
 enum Gender {
   male,
@@ -24,6 +25,9 @@ class InputPage extends StatefulWidget {
 class _InputPage extends State<InputPage> {
   Gender? selectedGender;
   int changeSliderValue = 180;
+  int weight = 60;
+  int age = 19;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,17 +103,27 @@ class _InputPage extends State<InputPage> {
                             ),
                           ],
                         ),
-                        Slider(
-                          activeColor: activeSliderColor,
-                          inactiveColor: inactiveSliderColor,
-                          value: changeSliderValue.toDouble(),
-                          min: 120.0,
-                          max: 220.0,
-                          onChanged: (double value) {
-                            setState(() {
-                              changeSliderValue = value.round();
-                            });
-                          },
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            thumbColor: const Color(0xFFEB1555),
+                            overlayColor: const Color(0x1FEB1555),
+                            inactiveTrackColor: inactiveSliderColor,
+                            activeTrackColor: Colors.white,
+                            thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 15.0),
+                            overlayShape: const RoundSliderOverlayShape(
+                                overlayRadius: 30.0),
+                          ),
+                          child: Slider(
+                            value: changeSliderValue.toDouble(),
+                            min: 120.0,
+                            max: 220.0,
+                            onChanged: (double value) {
+                              setState(() {
+                                changeSliderValue = value.round();
+                              });
+                            },
+                          ),
                         )
                       ],
                     ),
@@ -120,15 +134,85 @@ class _InputPage extends State<InputPage> {
           ),
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: CardContainer(
                     backgroundColor: activeCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'WEIGHT',
+                          style: lableStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: numberLableStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              iconName: FontAwesomeIcons.minus,
+                              buttonEvent: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
+                            const SizedBox(width: 10.0),
+                            RoundIconButton(
+                              iconName: FontAwesomeIcons.plus,
+                              buttonEvent: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: CardContainer(
                     backgroundColor: activeCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'AGE',
+                          style: lableStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: numberLableStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              iconName: FontAwesomeIcons.minus,
+                              buttonEvent: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            const SizedBox(width: 10.0),
+                            RoundIconButton(
+                              iconName: FontAwesomeIcons.plus,
+                              buttonEvent: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -145,16 +229,3 @@ class _InputPage extends State<InputPage> {
     );
   }
 }
-
-
-
-// Container(
-        // height: 200.0,
-        // width: 170.0,
-//         margin: EdgeInsets.all(15.0),
-//         decoration: BoxDecoration(
-//           color: Colors.red,
-//           // color: const activeCardColor,
-//           borderRadius: BorderRadius.circular(10.0),  
-//         ),
-//       )
