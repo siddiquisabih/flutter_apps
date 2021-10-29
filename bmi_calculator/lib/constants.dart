@@ -11,4 +11,17 @@ const bottomContainerColor = Color(0xFFEB1555);
 const activeSliderColor = Color(0xFFEB1555);
 const inactiveSliderColor = Color(0xFF8D8E98);
 
+const kLargeButtonTextStyle =
+    TextStyle(fontSize: 25.00, fontWeight: FontWeight.bold);
+const kLargeResultText =
+    TextStyle(fontSize: 50.00, fontWeight: FontWeight.bold, );
 
+const kOverWeight = TextStyle(
+    fontSize: 18.00, fontWeight: FontWeight.bold, color: Color(0xFF24D876));
+const kOverWeightResult = TextStyle(
+  fontSize: 100.00,
+  fontWeight: FontWeight.bold,
+);
+const kOverWeightDescription = TextStyle(
+  fontSize: 18.00,
+);

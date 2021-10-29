@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +8,8 @@ import 'card_container.dart';
 import 'constants.dart';
 import 'icon_with_button.dart';
 import 'results_page.dart';
+import 'footer_button.dart';
+import 'calculation.dart';
 
 enum Gender {
   male,
@@ -38,6 +39,7 @@ class _InputPage extends State<InputPage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -220,19 +222,22 @@ class _InputPage extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColor,
-            height: bottomContainerHeight,
-            margin: const EdgeInsets.only(top: 10),
-            width: double.infinity,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultsPage()));
-              },
-              child: const Text('Calculate'),
-            ),
-          )
+          BottomButton(
+            onPressed: () {
+              Calculation cal =
+                  Calculation(height: changeSliderValue, weight: weight);
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultsPage(
+                            bmiResult: cal.calculateBMI(),
+                            resultText: cal.getResults(),
+                            interpretation: cal.getInterpretation(),
+                          )));
+            },
+            title: 'Calculate',
+          ),
         ],
       ),
     );
