@@ -45,13 +45,17 @@ class _LocationScreenState extends State<LocationScreen> {
     });
   }
 
-  void goToCityPage() {
-    Navigator.push(
+  void goToCityPage() async {
+    var typedNamed = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => CityScreen(),
       ),
     );
+    if (typedNamed != null) {
+      var weatherData = await weather.getCityWeather(typedNamed);
+      updateUI(weatherData);
+    }
   }
 
   @override

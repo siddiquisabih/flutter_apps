@@ -2,7 +2,8 @@ import 'package:weather_app/services/location.dart';
 import 'package:weather_app/services/networking.dart';
 
 const apiKey = "b8d15b81f774b5ccd27cfe7f75303193";
-const API = "https://api.openweathermap.org/data/2.5/weather";
+const API = "https://api.openweathermap.org/data/2.5/weather"; 
+
 
 class WeatherModel {
   String getWeatherIcon(int condition) {
@@ -48,6 +49,16 @@ class WeatherModel {
 
     var weatherData = await helper.getData();
 
+    return weatherData;
+  }
+
+
+
+    Future<dynamic> getCityWeather(String cityName) async {
+    var url =
+        '$API?q=$cityName&apikey=$apiKey&units=metric';
+    NetworkServices helper = NetworkServices(uri: url);
+    var weatherData = await helper.getData();
     return weatherData;
   }
 }
