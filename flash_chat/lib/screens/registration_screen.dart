@@ -1,6 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flash_chat/routes/routeKey.dart';
 import 'package:flutter/material.dart';
 import './material_buttons.dart';
 import './input_fields.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -8,6 +11,24 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+
+  late String email;
+  late String password;
+
+  void registerUser() async {
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      if (newUser != null) {
+        Navigator.pushNamed(context, RouteKey.chatScreen);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,27 +46,33 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: Image.asset('images/logo.png'),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 48.0,
             ),
             InputField(
+              keyboardType: TextInputType.emailAddress,
               hintText: 'Enter your password',
-              onChange: (value) {},
+              onChange: (value) {
+                email = value;
+              },
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             InputField(
               hintText: 'Enter your password',
-              onChange: (value) {},
+              onChange: (value) {
+                password = value;
+              },
               isSecureText: true,
             ),
-            SizedBox(
+            const SizedBox(
               height: 24.0,
             ),
             AppButton(
               title: 'Register',
               color: Colors.blueAccent,
+              buttonEvent: registerUser,
             ),
           ],
         ),
