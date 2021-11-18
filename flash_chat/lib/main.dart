@@ -7,18 +7,23 @@ import 'package:flash_chat/routes/routeKey.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(FlashChat());
+
 }
 
 class FlashChat extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         textTheme: const TextTheme(
           bodyText2: TextStyle(color: Colors.black54),
+
+          
         ),
       ),
 
