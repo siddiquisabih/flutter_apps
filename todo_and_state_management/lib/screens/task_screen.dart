@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import '../widgets/tasks_list.dart';
+import 'add_task_screen.dart';
+
 class Task extends StatelessWidget {
   const Task({Key? key}) : super(key: key);
+
+  Widget buildBottomSheet(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text('asdasd'),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (context) => AddTask());
+        },
         child: const Icon(Icons.add),
         backgroundColor: Colors.lightBlueAccent,
       ),
@@ -64,5 +77,3 @@ class Task extends StatelessWidget {
     );
   }
 }
-
-
