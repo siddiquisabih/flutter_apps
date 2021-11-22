@@ -7,7 +7,11 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
-      children: [
+      children: const [
+        TaskTile(),
+        TaskTile(),
+        TaskTile(),
+        TaskTile(),
         TaskTile(),
       ],
     );
