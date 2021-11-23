@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AddTask extends StatelessWidget {
-  const AddTask({Key? key}) : super(key: key);
+  final Function addNewTodo;
+
+  AddTask({required this.addNewTodo, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String todoText = '';
     return Container(
       color: Color(0xFF757575),
       child: Container(
@@ -22,7 +25,6 @@ class AddTask extends StatelessWidget {
             ),
             const Text(
               'Add Task',
-              
               style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.lightBlueAccent,
@@ -31,10 +33,13 @@ class AddTask extends StatelessWidget {
             Container(
               margin:
                   const EdgeInsets.symmetric(horizontal: 60.0, vertical: 20.0),
-              child: const TextField(
+              child: TextField(
+                onChanged: (value) {
+                  todoText = value;
+                },
                 autofocus: true,
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   // hintText: "Type Here",
                   focusColor: Colors.lightBlueAccent,
                 ),
@@ -47,7 +52,7 @@ class AddTask extends StatelessWidget {
                 minWidth: double.infinity,
                 color: Colors.lightBlueAccent,
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () => addNewTodo(todoText),
                 highlightColor: Colors.lightBlueAccent,
                 child: const Text('Add'),
               ),

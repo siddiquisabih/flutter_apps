@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:todo_and_state_management/models/task.dart';
 import '../widgets/tasks_list.dart';
 import 'add_task_screen.dart';
 
-class Task extends StatelessWidget {
+class Task extends StatefulWidget {
   const Task({Key? key}) : super(key: key);
 
+  @override
+  State<Task> createState() => _TaskState();
+}
+
+class _TaskState extends State<Task> {
   Widget buildBottomSheet(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
         child: Text('asdasd'),
       ),
     );
+  }
+
+  List<TaskModal> taskList = [
+    TaskModal(name: 'buy Milk'),
+    TaskModal(name: 'buy Food'),
+    TaskModal(name: 'buy something'),
+  ];
+
+  void _addNewTask(value) {
+    setState(() {
+      taskList.add(TaskModal(name: value));
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -20,7 +39,11 @@ class Task extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => AddTask());
+            context: context,
+            builder: (context) => AddTask(
+              addNewTodo: (value) => _addNewTask(value),
+            ),
+          );
         },
         child: const Icon(Icons.add),
         backgroundColor: Colors.lightBlueAccent,
@@ -33,8 +56,8 @@ class Task extends StatelessWidget {
                 top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                CircleAvatar(
+              children: [
+                const CircleAvatar(
                   child: Icon(
                     Icons.list,
                     size: 30.0,
@@ -43,10 +66,10 @@ class Task extends StatelessWidget {
                   backgroundColor: Colors.white,
                   radius: 30.0,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
-                Text(
+                const Text(
                   'Todoey',
                   style: TextStyle(
                       color: Colors.white,
@@ -54,7 +77,7 @@ class Task extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${taskList.length} Tasks',
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
@@ -69,7 +92,14 @@ class Task extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskList(),
+              child: TaskList(
+                listData: taskList,
+                toggleCheckbox: (bool value, int index) {
+                  setState(() {
+                    taskList[index].toogleDone();
+                  });
+                },
+              ),
             ),
           )
         ],
