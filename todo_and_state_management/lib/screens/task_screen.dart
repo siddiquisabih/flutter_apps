@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_and_state_management/models/task.dart';
 import '../widgets/tasks_list.dart';
 import 'add_task_screen.dart';
+import '../models//task_data.dart';
+
+
 
 class Task extends StatefulWidget {
   const Task({Key? key}) : super(key: key);
@@ -11,13 +15,7 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-  Widget buildBottomSheet(BuildContext context) {
-    return Container(
-      child: const Center(
-        child: Text('asdasd'),
-      ),
-    );
-  }
+  
 
   List<TaskModal> taskList = [
     TaskModal(name: 'buy Milk'),
@@ -77,7 +75,7 @@ class _TaskState extends State<Task> {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${taskList.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskList} Tasks',
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
