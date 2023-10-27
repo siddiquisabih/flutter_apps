@@ -26,8 +26,12 @@ class MyHomePage extends StatelessWidget {
         bgColor: Colors.purple),
     OptionsModel(
         filePath: "assets/Chicken_01/Chicken_01.gltf",
-        optionName: "Chicken_01",
+        optionName: "Chicken",
         bgColor: Colors.orange),
+    OptionsModel(
+        filePath: "assets/shado/model.gltf",
+        optionName: "Shado's Car",
+        bgColor: Colors.pink),
   ];
 
   @override
@@ -38,7 +42,7 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.only(top: 20.0),
+        padding: const EdgeInsets.only(top: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
