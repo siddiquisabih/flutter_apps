@@ -28,10 +28,10 @@ class MyHomePage extends StatelessWidget {
         filePath: "assets/Chicken_01/Chicken_01.gltf",
         optionName: "Chicken",
         bgColor: Colors.orange),
-    OptionsModel(
-        filePath: "assets/shado/model.gltf",
-        optionName: "Shado's Car",
-        bgColor: Colors.pink),
+    // OptionsModel(
+    //     filePath: "assets/shado/model.gltf",
+    //     optionName: "Shado's Car",
+    //     bgColor: Colors.pink),
   ];
 
   @override
