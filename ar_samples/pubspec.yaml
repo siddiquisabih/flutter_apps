@@ -34,4 +34,4 @@ flutter:
     - assets/Duck/
     - assets/Avocado/
     - assets/Sponza/glTF/
-    # - assets/shado/
+    - assets/Engine/
