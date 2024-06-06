@@ -1,6 +1,4 @@
 import 'package:design_practice/screens/Home/home_screen_ui.dart';
-import 'package:design_practice/utils/app_colors.dart';
-import 'package:design_practice/widgets/home_icon_circle_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {

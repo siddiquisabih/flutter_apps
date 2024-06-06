@@ -1,6 +1,5 @@
 import 'package:design_practice/screens/Home/HomeContainers/all_home_containers.dart';
 import 'package:design_practice/utils/app_colors.dart';
-import 'package:design_practice/widgets/home_icon_circle_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
